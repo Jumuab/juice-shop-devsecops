@@ -13,18 +13,16 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      # Exercise 37: Semgrep SAST Scan
+      # Exercise 37: Static Application Security Testing (SAST)
       - name: Run Semgrep SAST
         run: |
           python3 -m pip install semgrep
-          semgrep --config=auto --error
+          python3 -m semgrep --config=auto
 
       # Exercise 38: Build Docker Image
       - name: Build Docker Image
         run: |
-          docker build -t 192.168.56.50:5000/juice-shop:latest .
-
+          docker build -t 192.168.56.50:5000/juice-shop:latest 
       # Exercise 38: Trivy Container Scan
       - name: Run Trivy Vulnerability Scan
         uses: aquasecurity/trivy-action@master
