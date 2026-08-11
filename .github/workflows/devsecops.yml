@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      # Exercise 37: Static Application Security Testing (SAST)
-      - name: Run Semgrep SAST
+       # Exercise 37: Semgrep SAST Scan (Excluding node_modules for speed)
+       - name: Run Semgrep SAST
         run: |
           python3 -m pip install semgrep
-          python3 -m semgrep --config=auto
+          python3 -m semgrep --config=auto --exclude node_modules --error
 
       # Exercise 38: Build Docker Image
       - name: Build Docker Image
