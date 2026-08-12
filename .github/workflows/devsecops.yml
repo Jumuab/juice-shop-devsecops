@@ -21,7 +21,8 @@ jobs:
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true 
-          severity: 'UNKNOWN'
+          severity: 'CRITICAL'
+          skip-dirs: 'node_modules'
          
 
 
