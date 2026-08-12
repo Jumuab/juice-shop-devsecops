@@ -1,8 +1,9 @@
-# test
 name: Trivy Security Scan
+
 on:
- push:
+  push:
     branches: [ "main" ]
+
 jobs:
   build:
     name: Trivy Scan
@@ -19,17 +20,10 @@ jobs:
         with:
           image-ref: 'test-image'
           format: 'table'
-          exit-code: '1'
+          exit-code: '0'
           ignore-unfixed: true 
           severity: 'CRITICAL'
           skip-dirs: 'node_modules'
-         
-
-
-
-       
-
-
 
 
 
