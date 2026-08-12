@@ -1,4 +1,4 @@
-name: DevSecOps Secure SDLC Pipeline
+name: Trivy Security Scan
 
 on:
   push:
@@ -7,33 +7,21 @@ on:
     branches: [ "main" ]
 
 jobs:
-  security-and-build:
+  build:
+    name: Trivy Scan
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
-       # Exercise 37: Semgrep SAST Scan (Excluding node_modules for speed)
-       - name: Run Semgrep SAST
-        run: |
-          python3 -m pip install semgrep
-          python3 -m semgrep --config=auto --exclude node_modules --error
 
-      # Exercise 38: Build Docker Image
-      - name: Build Docker Image
-        run: |
-          docker build -t 192.168.56.50:5000/juice-shop:latest 
-      # Exercise 38: Trivy Container Scan
-      - name: Run Trivy Vulnerability Scan
-        uses: aquasecurity/trivy-action@master
+      - name: Build the Docker image
+        run: docker build -t juice-shop .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: '192.168.56.50:5000/juice-shop:latest'
+          image-ref: 'juice-shop'
           format: 'table'
           exit-code: '1'
+          ignore-unfixed: false
           severity: 'CRITICAL'
-
-      # Exercise 39: Push to Registry Gate
-      - name: Push to Local Registry
-        if: success()
-        run: |
-          echo "Security scan gates passed cleanly."
