@@ -1,4 +1,4 @@
-#
+# test
 name: Trivy Security Scan
 on:
   push:
