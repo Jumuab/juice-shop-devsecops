@@ -1,11 +1,12 @@
 # test
 name: Trivy Security Scan
 on:
-  push:
+ push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+    paths:
+      - 'package.json'
+      - 'Dockerfile'
+      - '.github/workflows/devsecops.yml'
 jobs:
   build:
     name: Trivy Scan
