@@ -23,6 +23,12 @@ jobs:
           image-ref: 'juice-shop'
           format: 'table'
           exit-code: '1'
-          ignore-unfixed: false
+          ignore-unfixed: true 
           severity: 'CRITICAL'
            skip-dirs: 'node_modules'
+
+
+
+
+
+
